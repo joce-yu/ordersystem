@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="page-title">森植茶舖 - 線上點餐系統</title>
+    <title id="page-title">線上點餐系統</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts Inter & Noto Sans TC -->
@@ -65,16 +65,19 @@
 </head>
 <body class="bg-forest-50 text-slate-800 flex flex-col min-h-screen">
 
-    <!-- Header / Navbar -->
-    <header class="bg-white/85 backdrop-blur-md sticky top-0 z-40 border-b border-forest-100 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+    <!-- Header / Navbar (移至圖片輪播上方) -->
+    <header class="bg-white/95 backdrop-blur-md sticky top-0 z-40 border-b border-forest-100 shadow-sm">
+        <!-- 將導覽列最大寬度從 max-w-7xl 擴展為 max-w-[96rem] 以拉開左右寬度 -->
+        <div class="max-w-[96rem] mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <div class="w-12 h-12 bg-forest-600 rounded-2xl flex items-center justify-center text-white shadow-md shadow-forest-500/20">
-                    <i class="fa-solid fa-leaf text-2xl"></i>
+                <!-- 放大左上角 Logo 容器大小從 w-12 h-12改為 w-16 h-16 -->
+                <div id="nav-logo-container" class="w-16 h-16 bg-forest-600 rounded-2xl flex items-center justify-center text-white shadow-md shadow-forest-500/20 overflow-hidden">
+                    <i id="nav-logo-icon" class="fa-solid fa-leaf text-3xl"></i>
+                    <img id="nav-logo-img" src="" alt="Logo" class="w-full h-full object-cover hidden" onerror="this.classList.add('hidden'); document.getElementById('nav-logo-icon').classList.remove('hidden');">
                 </div>
                 <div>
-                    <h1 id="store-name-header" class="text-xl font-bold text-forest-900 tracking-wide">森植茶舖</h1>
-                    <p id="store-phone-header" class="text-xs text-forest-600 font-medium">載入商家資料中...</p>
+                    <h1 class="text-[21.38px] leading-tight font-bold text-forest-900 tracking-wide">線上點餐系統</h1>
+                    <p id="store-name-header" class="text-[13.94px] leading-snug text-forest-600 font-medium">商店名稱</p>
                 </div>
             </div>
             
@@ -101,32 +104,81 @@
         </div>
     </header>
 
-    <!-- Hero Banner -->
-    <section class="bg-gradient-to-r from-forest-800 to-forest-600 text-white py-12 px-4 sm:px-6 lg:px-8 mb-8 relative overflow-hidden">
-        <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl pointer-events-none">
-            <i class="fa-solid fa-mug-saucer"></i>
-        </div>
-        <div class="max-w-7xl mx-auto relative z-10 flex flex-col md:flex-row items-center justify-between">
-            <div class="mb-6 md:mb-0 text-center md:text-left">
-                <span id="store-badge-desc" class="bg-forest-500/30 text-forest-100 text-xs px-3 py-1 rounded-full font-semibold uppercase tracking-wider border border-forest-400/30">嚴選在地茶葉 ‧ 每日手作配料</span>
-                <h2 id="store-hero-title" class="text-3xl sm:text-4xl font-extrabold mt-3 mb-2 tracking-tight">細品山林原鄉的純粹甘甜</h2>
-                <p id="store-hero-desc" class="text-forest-100 max-w-xl text-sm sm:text-base">堅持使用天然蔗糖與新鮮熬煮配料，為您獻上一杯溫潤療癒的植系好茶。</p>
+    <!-- Hero Carousel Banner -->
+    <section class="w-full relative z-30 px-4 sm:px-6 lg:px-8 py-2">
+        <!-- 將輪播容器最大寬度調整為 max-w-7xl 的 0.9 倍 (max-w-6xl) -->
+        <div class="max-w-6xl mx-auto relative overflow-hidden shadow-xl rounded-3xl group h-56 sm:h-72 md:h-84 w-full bg-forest-900 border border-forest-100">
+            <!-- Carousel Slides Container -->
+            <div id="hero-carousel-slides" class="w-full h-full relative">
+                <!-- Slide 1 -->
+                <div class="carousel-slide absolute inset-0 transition-opacity duration-700 opacity-100 flex items-center">
+                    <img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=1200&q=80" class="absolute inset-0 w-full h-full object-cover" alt="夏日強檔推薦">
+                    <div class="absolute inset-0 bg-gradient-to-r from-forest-900/90 via-forest-900/50 to-transparent"></div>
+                    <div class="relative z-10 max-w-7xl mx-auto w-full px-6 sm:px-12 text-white">
+                        <div class="max-w-xl">
+                            <span id="store-badge-desc" class="inline-block bg-amber-500/90 text-white text-xs px-3 py-1 rounded-full font-bold tracking-wider mb-2">夏日熱銷特飲</span>
+                            <h2 id="store-hero-title" class="text-2xl sm:text-4xl font-extrabold tracking-tight drop-shadow-md">茉莉香綠 ‧ 鮮萃回甘</h2>
+                            <p id="store-hero-desc" class="text-forest-100 text-xs sm:text-base mt-2 mb-4 line-clamp-2">嚴選優質高山綠茶與鮮花窨製，打造口口留香的極致好茶！</p>
+                            <div class="flex items-center space-x-3">
+                                <span class="bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold border border-white/30"><i class="fa-solid fa-leaf text-amber-300 mr-1.5"></i>100% 天然蔗糖</span>
+                                <span class="bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold border border-white/30"><i class="fa-solid fa-droplet text-cyan-300 mr-1.5"></i>現點現萃</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="carousel-slide absolute inset-0 transition-opacity duration-700 opacity-0 pointer-events-none flex items-center">
+                    <img src="https://images.unsplash.com/photo-1541658016709-82535e94bc69?auto=format&fit=crop&w=1200&q=80" class="absolute inset-0 w-full h-full object-cover" alt="珍珠奶茶強檔">
+                    <div class="absolute inset-0 bg-gradient-to-r from-forest-900/90 via-forest-900/50 to-transparent"></div>
+                    <div class="relative z-10 max-w-7xl mx-auto w-full px-6 sm:px-12 text-white">
+                        <div class="max-w-xl">
+                            <span class="inline-block bg-forest-500/90 text-white text-xs px-3 py-1 rounded-full font-bold tracking-wider mb-2">人氣好評 No.1</span>
+                            <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight drop-shadow-md">黑糖波霸鮮奶茶</h2>
+                            <p class="text-forest-100 text-xs sm:text-base mt-2 mb-4">每日手作黑糖蜜燉慢熬珍珠，Q彈有勁，與小農鮮乳浪漫交融！</p>
+                            <div class="flex items-center space-x-3">
+                                <span class="bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold border border-white/30"><i class="fa-solid fa-star text-amber-300 mr-1.5"></i>招牌推薦</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="carousel-slide absolute inset-0 transition-opacity duration-700 opacity-0 pointer-events-none flex items-center">
+                    <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=1200&q=80" class="absolute inset-0 w-full h-full object-cover" alt="水果茶強檔">
+                    <div class="absolute inset-0 bg-gradient-to-r from-forest-900/90 via-forest-900/50 to-transparent"></div>
+                    <div class="relative z-10 max-w-7xl mx-auto w-full px-6 sm:px-12 text-white">
+                        <div class="max-w-xl">
+                            <span class="inline-block bg-teal-500/90 text-white text-xs px-3 py-1 rounded-full font-bold tracking-wider mb-2">鮮果季節限定</span>
+                            <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight drop-shadow-md">繽紛鮮果滿滿茶</h2>
+                            <p class="text-forest-100 text-xs sm:text-base mt-2 mb-4">嚴選當季新鮮水果，果香與茶香完美相會，沁涼解渴無負擔！</p>
+                            <div class="flex items-center space-x-3">
+                                <span class="bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold border border-white/30"><i class="fa-solid fa-lemon text-amber-300 mr-1.5"></i>新鮮果粒</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="flex space-x-4">
-                <div class="bg-white/10 backdrop-blur-md px-5 py-3 rounded-2xl border border-white/20 text-center">
-                    <div class="text-2xl font-bold">100%</div>
-                    <div class="text-xs text-forest-200">天然蔗糖</div>
-                </div>
-                <div class="bg-white/10 backdrop-blur-md px-5 py-3 rounded-2xl border border-white/20 text-center">
-                    <div class="text-2xl font-bold">現點現萃</div>
-                    <div class="text-xs text-forest-200">極致新鮮</div>
-                </div>
+
+            <!-- Left & Right Arrow Navigation -->
+            <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-md flex items-center justify-center transition z-30">
+                <i class="fa-solid fa-chevron-left text-sm"></i>
+            </button>
+            <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-md flex items-center justify-center transition z-30">
+                <i class="fa-solid fa-chevron-right text-sm"></i>
+            </button>
+
+            <!-- Dots Indicator -->
+            <div id="carousel-dots" class="absolute bottom-3 left-1/2 -translate-x-1/2 flex space-x-2 z-30">
+                <button onclick="goToSlide(0)" class="carousel-dot w-6 h-2.5 rounded-full bg-amber-400 transition-all"></button>
+                <button onclick="goToSlide(1)" class="carousel-dot w-2.5 h-2.5 rounded-full bg-white/50 hover:bg-white transition-all"></button>
+                <button onclick="goToSlide(2)" class="carousel-dot w-2.5 h-2.5 rounded-full bg-white/50 hover:bg-white transition-all"></button>
             </div>
         </div>
     </section>
 
     <!-- Main Content: Category Tabs & Product Grid -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex-grow mb-16 w-full">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex-grow mt-8 mb-16 w-full">
         <!-- Categories Tabs -->
         <div id="category-tabs-container" class="flex space-x-2 overflow-x-auto pb-4 mb-8 no-scrollbar">
             <!-- Dynamically populated categories -->
@@ -141,7 +193,7 @@
     <!-- Footer -->
     <footer class="bg-white border-t border-forest-100 py-8 text-center text-sm text-forest-700 mt-auto">
         <div class="max-w-7xl mx-auto px-4">
-            <p id="footer-store-name" class="font-medium">© 2026 森植茶舖 Forest Tea House. All rights reserved.</p>
+            <p id="footer-store-name" class="font-medium">© 2026 商店名稱 Forest Tea House. All rights reserved.</p>
             <p class="text-xs text-forest-600 mt-1">線上點餐系統 ‧ 綠色清新環保概念店</p>
         </div>
     </footer>
@@ -150,7 +202,14 @@
     <div id="store-info-modal" class="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl max-w-md w-full overflow-hidden shadow-2xl p-6 space-y-4">
             <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-                <h3 id="modal-store-name" class="text-xl font-bold text-forest-900">商店資訊</h3>
+                <div class="flex items-center space-x-3">
+                    <!-- 將店家資訊裡的 Logo 容器放大兩倍從 w-14 h-14 改為 w-28 h-28 -->
+                    <div id="modal-logo-container" class="w-28 h-28 bg-forest-600 rounded-2xl flex items-center justify-center text-white overflow-hidden shadow">
+                        <i id="modal-logo-icon" class="fa-solid fa-leaf text-5xl"></i>
+                        <img id="modal-logo-img" src="" alt="Logo" class="w-full h-full object-cover hidden" onerror="this.classList.add('hidden'); document.getElementById('modal-logo-icon').classList.remove('hidden');">
+                    </div>
+                    <h3 id="modal-store-name" class="text-xl font-bold text-forest-900">商店資訊</h3>
+                </div>
                 <button onclick="toggleStoreInfoModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
@@ -166,30 +225,32 @@
 
     <!-- Customization Modal -->
     <div id="custom-modal" class="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl transform transition-all relative">
+        <!-- 將彈出視窗整體的圓角改為適中的 rounded-2xl，並增加內部高度與空間 -->
+        <div class="bg-white rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl transform transition-all relative">
             <!-- Modal Header -->
-            <div class="bg-forest-700 p-6 text-white relative flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                <!-- Close Button Added Here -->
-                <button onclick="closeModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition z-10 cursor-pointer">
-                    <i class="fa-solid fa-xmark text-lg"></i>
+            <div class="bg-forest-700 p-5 sm:p-6 text-white relative flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <!-- Close Button -->
+                <button onclick="closeModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition z-10 cursor-pointer">
+                    <i class="fa-solid fa-xmark text-base"></i>
                 </button>
-                <img id="modal-product-image" src="" alt="飲品圖片" class="w-20 h-20 sm:w-24 sm:h-24 object-cover rounded-2xl shadow-md border-2 border-white/20 flex-shrink-0 bg-forest-800" onerror="this.src='https://placehold.co/200x200/dcfce7/166534?text=Tea'">
+                <!-- 圖片尺寸維持適中 -->
+                <img id="modal-product-image" src="" alt="飲品圖片" class="w-24 h-24 sm:w-28 sm:h-28 object-cover rounded-2xl shadow-md border-2 border-white/20 flex-shrink-0 bg-forest-800" onerror="this.src='https://placehold.co/200x200/dcfce7/166534?text=Tea'">
                 <div class="flex-grow pr-8">
-                    <span id="modal-category-tag" class="bg-forest-500/40 text-forest-100 text-xs px-2.5 py-1 rounded-md font-semibold">飲品類別</span>
-                    <h3 id="modal-product-name" class="text-2xl font-bold mt-2">飲品名稱</h3>
-                    <p id="modal-product-desc" class="text-forest-100 text-sm mt-1">飲品描述</p>
-                    <div class="mt-4 flex items-baseline space-x-2">
+                    <span id="modal-category-tag" class="bg-forest-500/40 text-forest-100 text-[11px] px-2.5 py-0.5 rounded-md font-semibold">飲品類別</span>
+                    <h3 id="modal-product-name" class="text-xl sm:text-2xl font-bold mt-1">飲品名稱</h3>
+                    <p id="modal-product-desc" class="text-forest-100 text-xs sm:text-sm mt-1.5 line-clamp-2">飲品描述</p>
+                    <div class="mt-3 flex items-baseline space-x-2">
                         <span class="text-xs text-forest-200">基本價格：</span>
-                        <span id="modal-product-price" class="text-2xl font-black text-amber-300">NT$ 0</span>
+                        <span id="modal-product-price" class="text-xl sm:text-2xl font-black text-amber-300">NT$ 0</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Modal Body options -->
-            <div class="p-6 max-h-[60vh] overflow-y-auto space-y-6">
+            <!-- Modal Body options - 增加上下長度與區塊間距 -->
+            <div class="p-5 sm:p-6 max-h-[60vh] overflow-y-auto space-y-5">
                 <!-- Size Selection -->
                 <div id="size-section-wrapper">
-                    <label class="block text-sm font-bold text-slate-700 mb-3 flex items-center">
+                    <label class="block text-xs sm:text-sm font-bold text-slate-700 mb-2.5 flex items-center">
                         <i class="fa-solid fa-glasses text-forest-600 mr-2"></i> 選擇容量
                     </label>
                     <div class="grid grid-cols-2 gap-3" id="size-options-container">
@@ -199,27 +260,27 @@
 
                 <!-- Ice Level Selection -->
                 <div id="ice-section-wrapper">
-                    <label class="block text-sm font-bold text-slate-700 mb-3 flex items-center">
+                    <label class="block text-xs sm:text-sm font-bold text-slate-700 mb-2 flex items-center">
                         <i class="fa-solid fa-snowflake text-forest-600 mr-2"></i> 選擇冰塊
                     </label>
-                    <div class="grid grid-cols-3 sm:grid-cols-5 gap-2" id="ice-options-container">
+                    <div class="grid grid-cols-3 sm:grid-cols-6 gap-2 max-w-lg mx-auto" id="ice-options-container">
                         <!-- Dynamically populated ice options -->
                     </div>
                 </div>
 
                 <!-- Sugar Level Selection -->
                 <div id="sugar-section-wrapper">
-                    <label class="block text-sm font-bold text-slate-700 mb-3 flex items-center">
+                    <label class="block text-xs sm:text-sm font-bold text-slate-700 mb-2 flex items-center">
                         <i class="fa-solid fa-cube text-forest-600 mr-2"></i> 選擇甜度
                     </label>
-                    <div class="grid grid-cols-3 sm:grid-cols-5 gap-2" id="sugar-options-container">
+                    <div class="grid grid-cols-3 sm:grid-cols-5 gap-2 max-w-lg mx-auto" id="sugar-options-container">
                         <!-- Dynamically populated sugar options -->
                     </div>
                 </div>
 
                 <!-- Toppings Selection -->
                 <div id="toppings-section-wrapper">
-                    <label class="block text-sm font-bold text-slate-700 mb-3 flex items-center justify-between">
+                    <label class="block text-xs sm:text-sm font-bold text-slate-700 mb-2.5 flex items-center justify-between">
                         <span class="flex items-center"><i class="fa-solid fa-plus text-forest-600 mr-2"></i> 加料選項 (最多可選 2 項)</span>
                     </label>
                     <div class="grid grid-cols-2 gap-3" id="toppings-container">
@@ -228,14 +289,14 @@
                 </div>
 
                 <!-- Quantity -->
-                <div class="flex items-center justify-between pt-2 border-t border-slate-100">
-                    <span class="text-sm font-bold text-slate-700">數量</span>
+                <div class="flex items-center justify-between pt-3 border-t border-slate-100">
+                    <span class="text-xs sm:text-sm font-bold text-slate-700">數量</span>
                     <div class="flex items-center space-x-3">
-                        <button onclick="adjustModalQty(-1)" class="w-9 h-9 rounded-xl bg-slate-100 hover:bg-forest-100 text-slate-700 hover:text-forest-700 transition flex items-center justify-center font-bold">
+                        <button onclick="adjustModalQty(-1)" class="w-8 h-8 rounded-xl bg-slate-100 hover:bg-forest-100 text-slate-700 hover:text-forest-700 transition flex items-center justify-center font-bold">
                             <i class="fa-solid fa-minus text-xs"></i>
                         </button>
-                        <span id="modal-qty" class="text-lg font-bold w-6 text-center">1</span>
-                        <button onclick="adjustModalQty(1)" class="w-9 h-9 rounded-xl bg-slate-100 hover:bg-forest-100 text-slate-700 hover:text-forest-700 transition flex items-center justify-center font-bold">
+                        <span id="modal-qty" class="text-base font-bold w-6 text-center">1</span>
+                        <button onclick="adjustModalQty(1)" class="w-8 h-8 rounded-xl bg-slate-100 hover:bg-forest-100 text-slate-700 hover:text-forest-700 transition flex items-center justify-center font-bold">
                             <i class="fa-solid fa-plus text-xs"></i>
                         </button>
                     </div>
@@ -243,12 +304,12 @@
             </div>
 
             <!-- Modal Footer -->
-            <div class="p-6 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
+            <div class="p-5 sm:p-6 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
                 <div>
-                    <span class="text-xs text-slate-500 block">總金額</span>
-                    <span id="modal-total-price" class="text-2xl font-black text-forest-700">NT$ 0</span>
+                    <span class="text-[11px] text-slate-500 block">總金額</span>
+                    <span id="modal-total-price" class="text-xl sm:text-2xl font-black text-forest-700">NT$ 0</span>
                 </div>
-                <button onclick="confirmAddToCart()" class="bg-forest-600 hover:bg-forest-700 text-white px-8 py-3 rounded-xl font-bold shadow-lg shadow-forest-600/30 transition flex items-center space-x-2">
+                <button onclick="confirmAddToCart()" class="bg-forest-600 hover:bg-forest-700 text-white px-6 sm:px-8 py-3 rounded-xl font-bold shadow-lg shadow-forest-600/30 transition flex items-center space-x-2 text-sm sm:text-base">
                     <i class="fa-solid fa-cart-plus"></i>
                     <span>加入購物車</span>
                 </button>
@@ -410,6 +471,7 @@
         // GID mapping for each spreadsheet tab
         const sheetGids = {
             Stores: "253494346",
+            StoreBanners: "892190948",
             ProductCategories: "1849963648",
             Products: "1595219352",
             CupSizes: "1455445077",
@@ -422,6 +484,7 @@
         // Global State Data from Spreadsheet
         let db = {
             store: {},
+            banners: [],
             categories: [],
             products: [],
             cupSizes: [],
@@ -434,9 +497,60 @@
         let ordersHistory = [];
         let currentSelectedProduct = null;
 
+        // Carousel Logic
+        let currentSlideIndex = 0;
+        let carouselInterval = null;
+
+        function startCarousel() {
+            if (carouselInterval) clearInterval(carouselInterval);
+            carouselInterval = setInterval(() => {
+                nextSlide();
+            }, 4000);
+        }
+
+        function showSlide(index) {
+            const slides = document.querySelectorAll('.carousel-slide');
+            const dots = document.querySelectorAll('.carousel-dot');
+            if (slides.length === 0) return;
+
+            currentSlideIndex = (index + slides.length) % slides.length;
+
+            slides.forEach((slide, i) => {
+                if (i === currentSlideIndex) {
+                    slide.classList.remove('opacity-0', 'pointer-events-none');
+                    slide.classList.add('opacity-100');
+                } else {
+                    slide.classList.remove('opacity-100');
+                    slide.classList.add('opacity-0', 'pointer-events-none');
+                }
+            });
+
+            dots.forEach((dot, i) => {
+                if (i === currentSlideIndex) {
+                    dot.className = 'carousel-dot w-8 h-3 rounded-full bg-amber-400 transition-all';
+                } else {
+                    dot.className = 'carousel-dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all';
+                }
+            });
+        }
+
+        function nextSlide() {
+            showSlide(currentSlideIndex + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlideIndex - 1);
+        }
+
+        function goToSlide(index) {
+            showSlide(index);
+            startCarousel();
+        }
+
         // Initialize App by fetching Spreadsheet data
         window.addEventListener('DOMContentLoaded', () => {
             loadSpreadsheetData();
+            startCarousel();
         });
 
         // Helper function to load a single sheet by name using its specific GID
@@ -468,6 +582,8 @@
 
                         if (name === 'Stores') {
                             db.store = normalizedRows.length > 0 ? normalizedRows[0] : {};
+                        } else if (name === 'StoreBanners') {
+                            db.banners = normalizedRows;
                         } else if (name === 'ProductCategories') {
                             db.categories = normalizedRows;
                         } else if (name === 'Products') {
@@ -496,6 +612,7 @@
 
             const sheetNames = [
                 'Stores',
+                'StoreBanners',
                 'ProductCategories',
                 'Products',
                 'CupSizes',
@@ -533,14 +650,42 @@
             const storeAddress = store.Address || store.address || store['地址'] || rawVals[2] || '無';
             const storeTime = store.TIme || store.Time || store.time || store['營業時間'] || rawVals[3] || '';
             const storeDesc = store.Description || store.description || store['描述'] || store['店家描述'] || rawVals[4] || '堅持使用天然蔗糖與新鮮熬煮配料';
+            const storeLogo = store.Logo || store.logo || store['Logo'] || store['標誌'] || store['圖片'] || rawVals[5] || '';
 
             document.getElementById('page-title').innerText = storeName;
             document.getElementById('store-name-header').innerText = storeName;
-            document.getElementById('store-phone-header').innerText = `電話：${storePhone} ‧ 營業：${storeTime}`;
-            document.getElementById('store-hero-title').innerText = `歡迎光臨 ${storeName}`;
-            document.getElementById('store-hero-desc').innerText = storeDesc;
-            document.getElementById('store-badge-desc').innerText = storeTime ? `營業時間 ‧ ${storeTime}` : '嚴選在地茶葉 ‧ 每日手作配料';
+            const storePhoneHeaderEl = document.getElementById('store-phone-header');
+            if (storePhoneHeaderEl) {
+                storePhoneHeaderEl.innerText = `電話：${storePhone} ‧ 營業：${storeTime}`;
+            }
+            
+            const heroTitleEl = document.getElementById('store-hero-title');
+            if (heroTitleEl) heroTitleEl.innerText = `${storeName} ‧ 嚴選手作特飲`;
+            const heroDescEl = document.getElementById('store-hero-desc');
+            if (heroDescEl) heroDescEl.innerText = storeDesc;
+            const badgeDescEl = document.getElementById('store-badge-desc');
+            if (badgeDescEl) badgeDescEl.innerText = storeTime ? `營業時間 ‧ ${storeTime}` : '嚴選在地茶葉 ‧ 每日手作配料';
+            
             document.getElementById('footer-store-name').innerText = `© 2026 ${storeName} All rights reserved.`;
+
+            // Setup Store Logo for Nav and Modal
+            if (storeLogo && String(storeLogo).trim() !== '') {
+                const navLogoImg = document.getElementById('nav-logo-img');
+                const navLogoIcon = document.getElementById('nav-logo-icon');
+                if (navLogoImg && navLogoIcon) {
+                    navLogoImg.src = storeLogo;
+                    navLogoImg.classList.remove('hidden');
+                    navLogoIcon.classList.add('hidden');
+                }
+
+                const modalLogoImg = document.getElementById('modal-logo-img');
+                const modalLogoIcon = document.getElementById('modal-logo-icon');
+                if (modalLogoImg && modalLogoIcon) {
+                    modalLogoImg.src = storeLogo;
+                    modalLogoImg.classList.remove('hidden');
+                    modalLogoIcon.classList.add('hidden');
+                }
+            }
 
             document.getElementById('modal-store-name').innerText = storeName;
             document.getElementById('store-info-phone').innerText = storePhone;
@@ -548,9 +693,77 @@
             document.getElementById('store-info-time').innerText = storeTime;
             document.getElementById('store-info-desc').innerText = storeDesc;
 
+            renderBanners();
             renderCategories();
             renderProducts('all');
             renderToppingsOptions();
+        }
+
+        function formatImageUrl(url) {
+            if (!url) return '';
+            let cleanUrl = String(url).trim();
+            // 自動轉換 Google Drive 分享連結為可直接嵌入的圖片連結
+            const driveMatch = cleanUrl.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/) || cleanUrl.match(/drive\.google\.com\/open\?id=([a-zA-Z0-9_-]+)/);
+            if (driveMatch && driveMatch[1]) {
+                return `https://lh3.googleusercontent.com/d/${driveMatch[1]}`;
+            }
+            return cleanUrl;
+        }
+
+        function renderBanners() {
+            const slidesContainer = document.getElementById('hero-carousel-slides');
+            const dotsContainer = document.getElementById('carousel-dots');
+            if (!slidesContainer || !dotsContainer) return;
+
+            const extractImgUrl = (b) => {
+                const raw = b._rawValues || [];
+                const foundByKey = b.Image || b.image || b.ImageUrl || b.imageurl || b.ImageURL || b.BannerUrl || b.bannerurl || b.Url || b.url || b['圖片網址'] || b['圖片位置'] || b['圖片'] || b['廣告圖片'];
+                if (foundByKey && String(foundByKey).trim() !== '') return formatImageUrl(foundByKey);
+                const foundHttp = raw.find(v => String(v).trim().startsWith('http'));
+                return foundHttp ? formatImageUrl(foundHttp) : '';
+            };
+
+            const validBanners = (db.banners || []).filter(b => extractImgUrl(b) !== '');
+
+            if (validBanners.length === 0) return;
+
+            slidesContainer.innerHTML = '';
+            dotsContainer.innerHTML = '';
+
+            validBanners.forEach((banner, index) => {
+                const imgUrl = extractImgUrl(banner);
+                const title = banner.Title || banner.title || banner['標題'] || '';
+                const desc = banner.Description || banner.description || banner['描述'] || banner['內容'] || '';
+                const badge = banner.Badge || banner.badge || banner.Tag || banner.tag || banner['標籤'] || '';
+
+                const isFirst = index === 0;
+                const slide = document.createElement('div');
+                slide.className = `carousel-slide absolute inset-0 transition-opacity duration-700 ${isFirst ? 'opacity-100' : 'opacity-0 pointer-events-none'} flex items-center`;
+
+                const hasText = title || desc || badge;
+                slide.innerHTML = `
+                    <img src="${imgUrl}" referrerpolicy="no-referrer" class="absolute inset-0 w-full h-full object-cover" alt="${title || '廣告輪播 ' + (index + 1)}" onerror="this.src='https://placehold.co/1200x500/14532d/ffffff?text=Banner+${index + 1}'">
+                    ${hasText ? `
+                        <div class="absolute inset-0 bg-gradient-to-r from-forest-900/90 via-forest-900/50 to-transparent"></div>
+                        <div class="relative z-10 p-6 sm:p-12 max-w-xl text-white">
+                            ${badge ? `<span class="inline-block bg-amber-500/90 text-white text-xs px-3 py-1 rounded-full font-bold tracking-wider mb-2">${badge}</span>` : ''}
+                            ${title ? `<h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight drop-shadow-md">${title}</h2>` : ''}
+                            ${desc ? `<p class="text-forest-100 text-xs sm:text-base mt-2 mb-4 line-clamp-2">${desc}</p>` : ''}
+                        </div>
+                    ` : ''}
+                `;
+                slidesContainer.appendChild(slide);
+
+                const dot = document.createElement('button');
+                dot.onclick = () => goToSlide(index);
+                dot.className = isFirst
+                    ? 'carousel-dot w-8 h-3 rounded-full bg-amber-400 transition-all'
+                    : 'carousel-dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all';
+                dotsContainer.appendChild(dot);
+            });
+
+            currentSlideIndex = 0;
+            startCarousel();
         }
 
         function renderCategories() {
@@ -881,19 +1094,19 @@
                 });
             }
 
-            // Render Ice Options
+            // Render Ice Options (when Options.Type = 溫度)
             const iceContainer = document.getElementById('ice-options-container');
             iceContainer.innerHTML = '';
             const iceOpts = db.options.filter(o => {
                 const rawO = o._rawValues || [];
-                const type = o.OptionType || o.optiontype || o.Type || o.type || o['選項類型'] || o['類型'] || rawO[0];
-                return String(type).includes('冰') || String(type).toLowerCase().includes('ice') || rawO[0] === '冰塊';
+                const type = o.Type || o.type || o.OptionType || o.optiontype || o['選項類型'] || o['類型'] || rawO[0];
+                return String(type).trim() === '溫度';
             });
             const defaultIces = iceOpts.length > 0 ? iceOpts.map(o => o.OptionName || o.optionname || o.Name || o.name || (o._rawValues || [])[1]) : ['正常冰', '少冰', '微冰', '去冰', '常溫', '熱'];
             
             defaultIces.forEach((ice, index) => {
                 const label = document.createElement('label');
-                label.className = `ice-btn-label border-2 ${index === 0 ? 'border-forest-600 bg-forest-600 text-white' : 'border-slate-200 text-slate-900'} rounded-xl p-3 flex items-center justify-center cursor-pointer transition hover:border-forest-400 text-center select-none`;
+                label.className = `ice-btn-label border-2 ${index === 0 ? 'border-forest-600 bg-forest-600 text-white' : 'border-slate-200 text-slate-900'} rounded-xl py-2 px-1 flex items-center justify-center cursor-pointer transition hover:border-forest-400 text-center select-none`;
                 label.onclick = function() {
                     document.querySelectorAll('.ice-btn-label').forEach(el => {
                         el.classList.remove('border-forest-600', 'bg-forest-600', 'text-white');
@@ -910,25 +1123,25 @@
                 label.innerHTML = `
                     <div class="flex items-center justify-center w-full">
                         <input type="radio" name="ice-level" value="${ice}" ${index === 0 ? 'checked' : ''} class="sr-only">
-                        <span class="font-medium text-sm text-center">${ice}</span>
+                        <span class="font-medium text-xs sm:text-sm text-center">${ice}</span>
                     </div>
                 `;
                 iceContainer.appendChild(label);
             });
 
-            // Render Sugar Options
+            // Render Sugar Options (when Options.Type = 甜度)
             const sugarContainer = document.getElementById('sugar-options-container');
             sugarContainer.innerHTML = '';
             const sugarOpts = db.options.filter(o => {
                 const rawO = o._rawValues || [];
-                const type = o.OptionType || o.optiontype || o.Type || o.type || o['選項類型'] || o['類型'] || rawO[0];
-                return String(type).includes('糖') || String(type).toLowerCase().includes('sugar') || rawO[0] === '甜度';
+                const type = o.Type || o.type || o.OptionType || o.optiontype || o['選項類型'] || o['類型'] || rawO[0];
+                return String(type).trim() === '甜度';
             });
             const defaultSugars = sugarOpts.length > 0 ? sugarOpts.map(o => o.OptionName || o.optionname || o.Name || o.name || (o._rawValues || [])[1]) : ['正常糖', '少糖', '半糖', '微糖', '無糖'];
             
             defaultSugars.forEach((sugar, index) => {
                 const label = document.createElement('label');
-                label.className = `sugar-btn-label border-2 ${index === 0 ? 'border-forest-600 bg-forest-600 text-white' : 'border-slate-200 text-slate-900'} rounded-xl p-3 flex items-center justify-center cursor-pointer transition hover:border-forest-400 text-center select-none`;
+                label.className = `sugar-btn-label border-2 ${index === 0 ? 'border-forest-600 bg-forest-600 text-white' : 'border-slate-200 text-slate-900'} rounded-xl py-2 px-1 flex items-center justify-center cursor-pointer transition hover:border-forest-400 text-center select-none`;
                 label.onclick = function() {
                     document.querySelectorAll('.sugar-btn-label').forEach(el => {
                         el.classList.remove('border-forest-600', 'bg-forest-600', 'text-white');
@@ -945,7 +1158,7 @@
                 label.innerHTML = `
                     <div class="flex items-center justify-center w-full">
                         <input type="radio" name="sugar-level" value="${sugar}" ${index === 0 ? 'checked' : ''} class="sr-only">
-                        <span class="font-medium text-sm text-center">${sugar}</span>
+                        <span class="font-medium text-xs sm:text-sm text-center">${sugar}</span>
                     </div>
                 `;
                 sugarContainer.appendChild(label);
