@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="page-title">線上點餐網站</title>
+    <title id="page-title">線上點餐系統</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts Inter & Noto Sans TC -->
@@ -76,7 +76,7 @@
                     <img id="nav-logo-img" src="" alt="Logo" class="w-full h-full object-cover hidden" onerror="this.classList.add('hidden'); document.getElementById('nav-logo-icon').classList.remove('hidden');">
                 </div>
                 <div>
-                    <h1 class="text-base sm:text-[21.38px] leading-tight font-bold text-forest-900 tracking-wide">線上點餐網站</h1>
+                    <h1 class="text-base sm:text-[21.38px] leading-tight font-bold text-forest-900 tracking-wide">線上點餐系統</h1>
                     <p id="store-name-header" class="text-xs sm:text-[13.94px] leading-snug text-forest-600 font-medium truncate max-w-[120px] sm:max-w-none">商店名稱</p>
                 </div>
             </div>
@@ -159,7 +159,7 @@
     <footer class="bg-white border-t border-forest-100 py-8 text-center text-sm text-forest-700 mt-auto">
         <div class="max-w-7xl mx-auto px-4">
             <p id="footer-store-name" class="font-medium">© 2026 商店名稱 Forest Tea House. All rights reserved.</p>
-            <p class="text-xs text-forest-600 mt-1">線上點餐網站 ‧ 綠色清新環保概念店</p>
+            <p class="text-xs text-forest-600 mt-1">線上點餐系統 ‧ 綠色清新環保概念店</p>
         </div>
     </footer>
 
@@ -596,7 +596,7 @@
             const desc = store.Description || store.description || store['簡介'] || raw[5] || '嚴選台灣好茶，現點現萃。';
             const logoUrl = store.Logo || store.logo || store.LogoUrl || store['Logo'] || raw[6] || '';
 
-            document.getElementById('page-title').innerText = `${name} - 線上點餐網站`;
+            document.getElementById('page-title').innerText = `${name} - 線上點餐系統`;
             document.getElementById('store-name-header').innerText = name;
             document.getElementById('footer-store-name').innerText = `© 2026 ${name}. All rights reserved.`;
             document.getElementById('modal-store-name').innerText = name;
@@ -1461,7 +1461,7 @@
 
             updateCartBadge();
             closeModal();
-            showToast(`已將 ${pName} 加入購物車！`);
+            //showToast(`已將 ${pName} 加入購物車！`);
         }
 
         function updateCartBadge() {
@@ -1961,7 +1961,7 @@
                     },
                     body: JSON.stringify(payload)
                 });
-                showToast("訂單與明細已同步寫入！");
+                //showToast("訂單與明細已同步寫入！");
             } catch (error) {
                 console.error("寫入試算表失敗:", error);
                 showToast("訂單已送出，但寫入資料時發生錯誤", "error");
