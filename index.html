@@ -457,7 +457,7 @@
     </div>
 
     <!-- Notification Toast -->
-    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-slate-900 text-white px-6 py-3.5 rounded-2xl shadow-xl flex items-center space-x-3 transform translate-y-20 opacity-0 transition-all duration-300">
+    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-slate-900 text-white px-6 py-3.5 rounded-2xl shadow-xl flex items-center space-x-3 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
         <i id="toast-icon" class="fa-solid fa-circle-check text-forest-400 text-lg"></i>
         <span id="toast-message" class="text-sm font-medium">已成功加入購物車！</span>
     </div>
@@ -1461,7 +1461,7 @@
 
             updateCartBadge();
             closeModal();
-            //showToast(`已將 ${pName} 加入購物車！`);
+            showToast(`已將 ${pName} 加入購物車！`);
         }
 
         function updateCartBadge() {
@@ -1961,7 +1961,7 @@
                     },
                     body: JSON.stringify(payload)
                 });
-                //showToast("訂單與明細已同步寫入！");
+                showToast("訂單與明細已同步寫入！");
             } catch (error) {
                 console.error("寫入試算表失敗:", error);
                 showToast("訂單已送出，但寫入資料時發生錯誤", "error");
