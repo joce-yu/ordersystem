@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="page-title">線上點餐系統</title>
+    <title id="page-title">線上點餐系統-測試版</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Noto Sans TC -->
@@ -687,7 +687,7 @@
             const desc = pick(s, ['description', '簡介'], 5, '嚴選台灣好茶，現點現萃。');
             const logoUrl = str(pick(s, ['logo', 'logourl'], 6)).trim();
 
-            $('page-title').innerText = `${name} - 線上點餐系統`;
+            //$('page-title').innerText = `${name} - 線上點餐系統`;
             $('store-name-header').innerText = name;
             $('footer-store-name').innerText = `© 2026 ${name}. All rights reserved.`;
             $('modal-store-name').innerText = name;
