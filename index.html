@@ -95,11 +95,6 @@
                     <i class="fa-solid fa-magnifying-glass text-base sm:text-sm"></i>
                     <span class="hidden sm:inline">查詢訂單</span>
                 </button>
-                <button id="header-google-btn" onclick="handleHeaderGoogleAuthClick()" class="flex items-center justify-center sm:space-x-2 w-10 sm:w-auto px-0 sm:px-4 h-10 sm:h-11 rounded-xl border border-forest-200 text-forest-700 hover:bg-forest-50 transition font-medium text-sm whitespace-nowrap" title="登入/註冊">
-                    <i id="header-google-icon" class="fa-solid fa-user text-base sm:text-sm text-forest-600"></i>
-                    <img id="header-google-avatar" src="" alt="Avatar" class="w-6 h-6 rounded-full object-cover hidden border border-forest-300">
-                    <span id="header-google-text" class="hidden sm:inline max-w-[96px] truncate">登入/註冊</span>
-                </button>
                 <button onclick="toggleCartModal()" class="relative bg-forest-600 hover:bg-forest-700 text-white w-10 sm:w-auto px-0 sm:px-5 h-10 sm:h-11 rounded-xl font-medium shadow-lg shadow-forest-600/30 transition flex items-center justify-center sm:space-x-2 text-sm whitespace-nowrap" title="購物車">
                     <i class="fa-solid fa-bag-shopping text-base sm:text-sm"></i>
                     <span class="hidden sm:inline">購物車</span>
@@ -249,64 +244,38 @@
 
                 <!-- Toppings Selection -->
                 <div id="toppings-section-wrapper">
-                    <label class="block text-xs sm:text-sm font-bold text-slate-700 mb-2 flex items-center">
-                        <i class="fa-solid fa-plus-circle text-forest-600 mr-2"></i> 加料選項 <span class="text-xs font-normal text-slate-400 ml-1">(最多選 2 項)</span>
+                    <label class="block text-xs sm:text-sm font-bold text-slate-700 mb-2.5 flex items-center justify-between">
+                        <span class="flex items-center"><i class="fa-solid fa-plus text-forest-600 mr-2"></i> 加料選項 (最多可選 2 項)</span>
                     </label>
-                    <div class="grid grid-cols-2 gap-2.5" id="toppings-container">
-                        <!-- Dynamically populated toppings -->
+                    <div class="grid grid-cols-2 gap-2.5 sm:gap-3" id="toppings-container">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Quantity -->
+                <div class="flex items-center justify-between pt-3 border-t border-slate-100">
+                    <span class="text-xs sm:text-sm font-bold text-slate-700">數量</span>
+                    <div class="flex items-center space-x-3">
+                        <button onclick="adjustModalQty(-1)" class="w-9 h-9 sm:w-8 sm:h-8 rounded-xl bg-slate-100 hover:bg-forest-100 text-slate-700 hover:text-forest-700 transition flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-minus text-xs"></i>
+                        </button>
+                        <span id="modal-qty" class="text-base font-bold w-6 text-center">1</span>
+                        <button onclick="adjustModalQty(1)" class="w-9 h-9 sm:w-8 sm:h-8 rounded-xl bg-slate-100 hover:bg-forest-100 text-slate-700 hover:text-forest-700 transition flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-plus text-xs"></i>
+                        </button>
                     </div>
                 </div>
             </div>
 
-            <!-- Modal Footer: Quantity & Add to Cart -->
-            <div class="p-4 sm:p-6 bg-slate-50 border-t border-slate-100 flex items-center justify-between gap-3 flex-shrink-0">
-                <div class="flex items-center bg-white border border-slate-200 rounded-xl p-1 shadow-sm">
-                    <button type="button" onclick="adjustModalQty(-1)" class="w-9 h-9 rounded-lg hover:bg-slate-100 text-slate-600 flex items-center justify-center transition">
-                        <i class="fa-solid fa-minus text-xs"></i>
-                    </button>
-                    <span id="modal-qty" class="w-10 text-center font-bold text-slate-900 text-base">1</span>
-                    <button type="button" onclick="adjustModalQty(1)" class="w-9 h-9 rounded-lg hover:bg-slate-100 text-slate-600 flex items-center justify-center transition">
-                        <i class="fa-solid fa-plus text-xs"></i>
-                    </button>
-                </div>
-                <button type="button" onclick="confirmAddToCart()" class="flex-grow bg-forest-600 hover:bg-forest-700 text-white py-3.5 px-5 rounded-xl font-bold shadow-lg shadow-forest-600/30 transition flex items-center justify-between text-sm sm:text-base">
-                    <span>加入購物車</span>
-                    <span id="modal-total-price" class="font-black text-amber-200">NT$ 0</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- User Sign-In Modal -->
-    <div id="google-auth-modal" class="fixed inset-0 z-[70] bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl space-y-4">
-            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-                <h3 class="text-lg font-bold text-forest-900 flex items-center">
-                    <i class="fa-solid fa-circle-user text-forest-600 mr-2"></i> Google 登入 / 註冊
-                </h3>
-                <button onclick="toggleGoogleAuthModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-
-            <div id="modal-google-unauth-view" class="space-y-4">
-                <p class="text-xs text-slate-600 leading-relaxed">請使用您的 Google 帳號進行一鍵快速登入或註冊，系統將自動同步您的會員資料：</p>
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-3 text-center">
-                    <div class="text-xs font-bold text-slate-700 flex items-center justify-center">
-                        <i class="fa-brands fa-google text-red-500 mr-1.5"></i> Google OAuth 快速授權
-                    </div>
-                    <div id="modal-google-btn-container" class="flex justify-center py-2 min-h-[44px]"></div>
-                </div>
-            </div>
-
-            <div id="modal-google-auth-view" class="hidden space-y-4 text-center">
-                <img id="modal-user-avatar" src="" alt="Avatar" class="w-16 h-16 rounded-full mx-auto border-2 border-forest-500 shadow">
+            <!-- Modal Footer -->
+            <div class="p-4 sm:p-6 bg-slate-50 border-t border-slate-100 flex items-center justify-between flex-shrink-0">
                 <div>
-                    <h4 id="modal-user-name" class="font-bold text-base text-slate-900"></h4>
-                    <p id="modal-user-email" class="text-xs text-slate-500"></p>
+                    <span class="text-[11px] text-slate-500 block">總金額</span>
+                    <span id="modal-total-price" class="text-xl sm:text-2xl font-black text-forest-700">NT$ 0</span>
                 </div>
-                <button type="button" onclick="logoutGoogleUser(); toggleGoogleAuthModal();" class="w-full py-2.5 rounded-xl border border-red-200 text-red-600 hover:bg-red-50 font-bold text-sm transition">
-                    登出帳號
+                <button onclick="confirmAddToCart()" class="bg-forest-600 hover:bg-forest-700 text-white px-5 sm:px-8 py-3 rounded-xl font-bold shadow-lg shadow-forest-600/30 transition flex items-center space-x-2 text-sm sm:text-base">
+                    <i class="fa-solid fa-cart-plus"></i>
+                    <span>加入購物車</span>
                 </button>
             </div>
         </div>
@@ -398,30 +367,9 @@
                 </button>
             </div>
 
-            <!-- Google Sign-In Section in Checkout -->
-            <div id="checkout-google-section" class="bg-white p-4 rounded-2xl border border-slate-200 space-y-2.5 shadow-sm">
-                <div class="flex items-center justify-between">
-                    <span class="text-xs font-bold text-slate-700 flex items-center">
-                        <i class="fa-brands fa-google text-red-500 mr-1.5"></i> Google 帳號快速帶入
-                    </span>
-                    <span id="checkout-google-badge" class="hidden text-[11px] font-bold bg-forest-100 text-forest-700 px-2 py-0.5 rounded-full">已登入</span>
-                </div>
-                <div id="google-signin-button-wrapper" class="flex justify-center min-h-[40px]"></div>
-                <div id="checkout-google-logged-in-bar" class="hidden flex items-center justify-between bg-forest-50 p-2.5 rounded-xl border border-forest-200">
-                    <div class="flex items-center space-x-2.5 min-w-0">
-                        <img id="checkout-google-avatar" src="" alt="Avatar" class="w-8 h-8 rounded-full object-cover flex-shrink-0">
-                        <div class="min-w-0">
-                            <p id="checkout-google-name" class="text-xs font-bold text-forest-900 truncate"></p>
-                            <p id="checkout-google-email" class="text-[11px] text-slate-500 truncate"></p>
-                        </div>
-                    </div>
-                    <button type="button" onclick="logoutGoogleUser()" class="text-xs text-red-600 hover:text-red-700 font-bold px-2 py-1 rounded-lg hover:bg-red-50 transition flex-shrink-0">登出</button>
-                </div>
-            </div>
-
             <!-- Guest Checkout Form Section -->
             <div class="bg-forest-50/70 p-4 rounded-2xl border border-forest-100 space-y-3.5">
-                <h4 id="checkout-form-title" class="font-bold text-sm text-forest-900 flex items-center"><i class="fa-solid fa-user-check mr-2 text-forest-600"></i> 訂購人資料填寫</h4>
+                <h4 class="font-bold text-sm text-forest-900 flex items-center"><i class="fa-solid fa-user-check mr-2 text-forest-600"></i> 訪客快速點餐</h4>
                 <div>
                     <label class="block text-xs font-medium text-slate-600 mb-1">姓名 <span class="text-red-500">*</span></label>
                     <input type="text" id="guest-name" placeholder="請輸入您的姓名" class="w-full px-3.5 py-3 sm:py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-forest-600 bg-white">
@@ -481,18 +429,25 @@
                 </button>
             </div>
 
-            <div class="p-4 sm:p-6 border-b border-slate-100 bg-slate-50/70 space-y-3 flex-shrink-0">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                    <input type="text" id="query-customer-name" placeholder="訂購人姓名" class="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-forest-600 bg-white">
-                    <input type="tel" id="query-customer-phone" placeholder="手機號碼 (09xxxxxxxx)" class="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-forest-600 bg-white">
+            <!-- 姓名與電話查詢表單 -->
+            <div class="p-4 sm:p-5 bg-forest-50/80 border-b border-forest-100 space-y-3 flex-shrink-0">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">訂購人姓名 <span class="text-red-500">*</span></label>
+                        <input type="text" id="query-customer-name" onkeydown="if(event.key==='Enter') searchOrdersFromSheets()" placeholder="請輸入訂購人姓名" class="w-full px-3.5 py-3 sm:py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-forest-600 bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">手機號碼 <span class="text-red-500">*</span></label>
+                        <input type="tel" id="query-customer-phone" onkeydown="if(event.key==='Enter') searchOrdersFromSheets()" placeholder="請輸入手機號碼" class="w-full px-3.5 py-3 sm:py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-forest-600 bg-white">
+                    </div>
                 </div>
-                <button id="btn-search-orders" type="button" onclick="searchOrdersFromSheets()" class="w-full bg-forest-600 hover:bg-forest-700 text-white py-2.5 rounded-xl font-bold text-sm shadow-md shadow-forest-600/20 transition flex items-center justify-center space-x-2">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <span>查詢訂單狀態</span>
+                <button onclick="searchOrdersFromSheets()" id="btn-search-orders" class="w-full bg-forest-600 hover:bg-forest-700 text-white py-3 sm:py-2.5 rounded-xl font-bold text-sm shadow-md shadow-forest-600/20 transition flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-search"></i>
+                    <span>查詢訂單紀錄</span>
                 </button>
             </div>
 
-            <div id="orders-list-container" class="p-4 sm:p-6 overflow-y-auto flex-grow space-y-3">
+            <div id="orders-list-container" class="p-4 sm:p-6 overflow-y-auto space-y-4 flex-grow">
                 <div class="text-center py-10 text-slate-400">
                     <i class="fa-solid fa-receipt text-4xl mb-3 text-slate-300"></i>
                     <p class="text-sm">請輸入訂購時的姓名與手機號碼進行查詢</p>
@@ -531,10 +486,6 @@
         // Google Apps Script Web App URL (用於將 Orders 與 OrderItems 寫入 Google 試算表)
         let GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw-eFjwFpm-UAkJY18_8YBjOmb-HgVeWl__HyM8g-kvF4Udh5eGaIsD-D6CrIMVUd_y/exec";
 
-        // Google OAuth 2.0 Client ID (已預先設定您的 Google Client ID)
-        let GOOGLE_CLIENT_ID = "79658342482-i8rspduk0aavbbjcu43ml0vloktc1tju.apps.googleusercontent.com";
-        let currentGoogleUser = null;
-
         let db = {
             store: {},
             storeSettings: {},
@@ -554,49 +505,6 @@
         let ordersHistory = [];
         let currentSelectedProduct = null;
 
-        // 輔助函式：將二維陣列或物件陣列標準化為系統使用的格式
-        function normalizeSheetRows(rawRows) {
-            return (rawRows || []).map(row => {
-                const norm = { ...row, _rawValues: Object.values(row) };
-                Object.keys(row).forEach(k => {
-                    norm[k.trim().toLowerCase()] = row[k];
-                });
-                return norm;
-            });
-        }
-
-        // 透過 Google Apps Script 即時讀取所有工作表資料（繞過 Google CSV 公開發佈的 3-5 分鐘 CDN 快取延遲）
-        async function fetchAllSheetsFromGAS() {
-            if (!GAS_WEB_APP_URL) return false;
-            try {
-                const res = await fetch(`${GAS_WEB_APP_URL}?action=getAllData&_t=${Date.now()}`, {
-                    method: 'GET',
-                    cache: 'no-store'
-                });
-                if (!res.ok) return false;
-                const json = await res.json();
-                if (json && json.status === 'success' && json.data) {
-                    const d = json.data;
-                    if (d.Stores) db.store = normalizeSheetRows(d.Stores)[0] || {};
-                    if (d.StoreSettings) db.storeSettings = normalizeSheetRows(d.StoreSettings)[0] || {};
-                    if (d.StoreBanners) db.banners = normalizeSheetRows(d.StoreBanners);
-                    if (d.ProductCategories) db.categories = normalizeSheetRows(d.ProductCategories);
-                    if (d.Products) db.products = normalizeSheetRows(d.Products);
-                    if (d.CupSizes) db.cupSizes = normalizeSheetRows(d.CupSizes);
-                    if (d.ProductPrices) db.productPrices = normalizeSheetRows(d.ProductPrices);
-                    if (d.Options) db.options = normalizeSheetRows(d.Options);
-                    if (d.Toppings) db.toppings = normalizeSheetRows(d.Toppings);
-                    if (d.Orders) db.orders = normalizeSheetRows(d.Orders);
-                    if (d.OrderItems) db.orderItems = normalizeSheetRows(d.OrderItems);
-                    if (d.Users) db.users = normalizeSheetRows(d.Users);
-                    return true;
-                }
-            } catch (e) {
-                console.warn("GAS 即時讀取未啟用或失敗，自動切換為公開 CSV 讀取模式:", e);
-            }
-            return false;
-        }
-
         async function loadSheet(name) {
             const gid = sheetGids[name];
             if (!gid) return;
@@ -608,7 +516,14 @@
                     header: true,
                     skipEmptyLines: true,
                     complete: function(results) {
-                        const normalizedRows = normalizeSheetRows(results.data || []);
+                        const rawRows = results.data || [];
+                        const normalizedRows = rawRows.map(row => {
+                            const norm = { ...row, _rawValues: Object.values(row) };
+                            Object.keys(row).forEach(k => {
+                                norm[k.trim().toLowerCase()] = row[k];
+                            });
+                            return norm;
+                        });
 
                         if (name === 'Stores') {
                             db.store = normalizedRows[0] || {};
@@ -652,308 +567,23 @@
                 productGrid.innerHTML = `<div class="col-span-full text-center py-16 text-forest-600"><i class="fa-solid fa-circle-notch fa-spin text-3xl mb-3"></i><p class="font-medium">正在載入最新菜單與商店資料...</p></div>`;
             }
 
-            // 優先透過 GAS 即時讀取（零快取延遲）；若 GAS 尚未更新 doGet，則退回 CSV 讀取
-            const loadedFromGas = await fetchAllSheetsFromGAS();
-
-            if (!loadedFromGas) {
-                await Promise.all([
-                    loadSheet('Stores'),
-                    loadSheet('StoreSettings'),
-                    loadSheet('StoreBanners'),
-                    loadSheet('ProductCategories'),
-                    loadSheet('Products'),
-                    loadSheet('CupSizes'),
-                    loadSheet('ProductPrices'),
-                    loadSheet('Options'),
-                    loadSheet('Toppings')
-                ]);
-            }
+            await Promise.all([
+                loadSheet('Stores'),
+                loadSheet('StoreSettings'),
+                loadSheet('StoreBanners'),
+                loadSheet('ProductCategories'),
+                loadSheet('Products'),
+                loadSheet('CupSizes'),
+                loadSheet('ProductPrices'),
+                loadSheet('Options'),
+                loadSheet('Toppings')
+            ]);
 
             renderStoreInfo();
             renderBanners();
             renderCategories();
             renderProducts();
-            initGoogleSignInFromSettings();
             showToast("菜單資料已更新！");
-        }
-
-        function decodeJwtPayload(token) {
-            try {
-                const base64Url = token.split('.')[1];
-                const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-                const jsonPayload = decodeURIComponent(atob(base64).split('').map(c => {
-                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-                }).join(''));
-                return JSON.parse(jsonPayload);
-            } catch (e) {
-                console.error("解析 Google JWT 失敗:", e);
-                return null;
-            }
-        }
-
-        function initGoogleSignInFromSettings() {
-            const settings = db.storeSettings || {};
-            const store = db.store || {};
-            const sheetClientId = String(
-                settings.GoogleClientID || settings.googleclientid ||
-                store.GoogleClientID || store.googleclientid || ''
-            ).trim();
-
-            if (sheetClientId && sheetClientId.includes('.apps.googleusercontent.com')) {
-                GOOGLE_CLIENT_ID = sheetClientId;
-            }
-            setupGoogleIdentityServices();
-        }
-
-        function setupGoogleIdentityServices() {
-            const modalContainer = document.getElementById('modal-google-btn-container');
-            const checkoutContainer = document.getElementById('google-signin-button-wrapper');
-
-            if (!GOOGLE_CLIENT_ID) {
-                const fallbackBtnHtml = `
-                    <button type="button" onclick="openDirectGoogleQuickRegister()" class="w-full max-w-[260px] mx-auto bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 rounded-full py-2.5 px-4 font-bold text-xs shadow-sm transition flex items-center justify-center space-x-2.5">
-                        <svg class="w-4 h-4" viewBox="0 0 24 24">
-                            <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
-                            <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.29v3.14C3.26 21.3 7.31 24 12 24z"/>
-                            <path fill="#FBBC05" d="M5.28 14.24c-.24-.72-.38-1.49-.38-2.24s.14-1.52.38-2.24V6.62H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.38l3.99-3.14z"/>
-                            <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.62l3.99 3.14c.95-2.85 3.6-4.96 6.72-4.96z"/>
-                        </svg>
-                        <span>使用 Google OAuth 登入</span>
-                    </button>
-                `;
-                if (modalContainer) modalContainer.innerHTML = fallbackBtnHtml;
-                if (checkoutContainer && !currentGoogleUser) checkoutContainer.innerHTML = fallbackBtnHtml;
-                return;
-            }
-
-            if (typeof google === 'undefined' || !google.accounts || !google.accounts.id) {
-                setTimeout(setupGoogleIdentityServices, 400);
-                return;
-            }
-
-            google.accounts.id.initialize({
-                client_id: GOOGLE_CLIENT_ID,
-                callback: handleGoogleCredentialResponse,
-                auto_select: false
-            });
-
-            if (modalContainer) {
-                modalContainer.innerHTML = '';
-                google.accounts.id.renderButton(modalContainer, {
-                    theme: 'outline',
-                    size: 'large',
-                    width: 260,
-                    text: 'signin_with',
-                    shape: 'pill'
-                });
-            }
-
-            if (checkoutContainer && !currentGoogleUser) {
-                checkoutContainer.innerHTML = '';
-                google.accounts.id.renderButton(checkoutContainer, {
-                    theme: 'outline',
-                    size: 'medium',
-                    width: 280,
-                    text: 'continue_with',
-                    shape: 'pill'
-                });
-            }
-        }
-
-        function openDirectGoogleQuickRegister() {
-            // 自動帶入預設測試會員，實現一鍵點擊即可註冊/登入
-            const defaultUser = {
-                userId: 'USR-' + Math.floor(100000 + Math.random() * 900000),
-                googleSub: 'G-DEMO-' + Date.now(),
-                name: 'Google 會員',
-                email: 'member@gmail.com',
-                picture: '',
-                phone: '0912345678',
-                isActive: 1
-            };
-
-            currentGoogleUser = defaultUser;
-            updateGoogleAuthUI();
-            syncGoogleUserToSheet(currentGoogleUser);
-
-            const authModal = document.getElementById('google-auth-modal');
-            if (authModal && !authModal.classList.contains('hidden')) {
-                authModal.classList.add('hidden');
-            }
-            showToast(`歡迎回來，${currentGoogleUser.name}！`);
-        }
-
-        async function handleGoogleCredentialResponse(response) {
-            const payload = decodeJwtPayload(response.credential);
-            if (!payload) {
-                showCustomAlert("Google 登入驗證失敗，請重試！");
-                return;
-            }
-
-            const googleSub = payload.sub || '';
-            const email = payload.email || '';
-
-            // 檢查 Users 試算表中是否已有此會員資料 (比對 GoogleSub 或 Email)
-            const existingUser = (db.users || []).find(u => {
-                const raw = u._rawValues || [];
-                const uSub = String(u.GoogleSub || u.googlesub || raw[1] || '').trim();
-                const uEmail = String(u.Email || u.email || raw[4] || '').trim();
-                return (googleSub && uSub === googleSub) || (email && uEmail === email);
-            });
-
-            let resolvedUserId = 'USR-' + Math.floor(100000 + Math.random() * 900000);
-            let savedPhone = '';
-
-            if (existingUser) {
-                const raw = existingUser._rawValues || [];
-                const isAct = existingUser.IsActive !== undefined ? existingUser.IsActive : (existingUser.isactive !== undefined ? existingUser.isactive : raw[6]);
-                if (String(isAct).trim() === '0' || String(isAct).toLowerCase() === 'false') {
-                    showCustomAlert("此會員帳號已被停用，請聯繫店家！");
-                    return;
-                }
-                const existingId = String(existingUser.UserID || existingUser.userid || raw[0] || '').trim();
-                if (existingId) resolvedUserId = existingId;
-                savedPhone = String(existingUser.Phone || existingUser.phone || raw[3] || '').replace(/^'/, '').trim();
-            }
-
-            currentGoogleUser = {
-                userId: resolvedUserId,
-                googleSub: googleSub,
-                name: payload.name || (email ? email.split('@')[0] : '會員'),
-                email: email,
-                picture: payload.picture || '',
-                phone: savedPhone,
-                isActive: 1
-            };
-
-            updateGoogleAuthUI();
-            syncGoogleUserToSheet(currentGoogleUser);
-
-            const authModal = document.getElementById('google-auth-modal');
-            if (authModal && !authModal.classList.contains('hidden')) {
-                authModal.classList.add('hidden');
-            }
-            showToast(`歡迎回來，${currentGoogleUser.name}！`);
-        }
-
-        function updateGoogleAuthUI() {
-            const headerIcon = document.getElementById('header-google-icon');
-            const headerAvatar = document.getElementById('header-google-avatar');
-            const headerText = document.getElementById('header-google-text');
-
-            const modalUnauth = document.getElementById('modal-google-unauth-view');
-            const modalAuth = document.getElementById('modal-google-auth-view');
-
-            const checkoutBtnWrap = document.getElementById('google-signin-button-wrapper');
-            const checkoutLoggedBar = document.getElementById('checkout-google-logged-in-bar');
-            const checkoutBadge = document.getElementById('checkout-google-badge');
-            const guestNameInput = document.getElementById('guest-name');
-            const guestPhoneInput = document.getElementById('guest-phone');
-
-            if (currentGoogleUser) {
-                if (currentGoogleUser.picture) {
-                    headerAvatar.src = currentGoogleUser.picture;
-                    headerAvatar.classList.remove('hidden');
-                    headerIcon.classList.add('hidden');
-                } else {
-                    headerAvatar.classList.add('hidden');
-                    headerIcon.classList.remove('hidden');
-                }
-                headerText.innerText = currentGoogleUser.name;
-
-                if (modalUnauth) modalUnauth.classList.add('hidden');
-                if (modalAuth) modalAuth.classList.remove('hidden');
-                const mAvatar = document.getElementById('modal-user-avatar');
-                if (mAvatar) mAvatar.src = currentGoogleUser.picture || 'https://placehold.co/100x100/dcfce7/166534?text=G';
-                const mName = document.getElementById('modal-user-name');
-                if (mName) mName.innerText = currentGoogleUser.name;
-                const mEmail = document.getElementById('modal-user-email');
-                if (mEmail) mEmail.innerText = currentGoogleUser.email;
-
-                if (checkoutBtnWrap) checkoutBtnWrap.classList.add('hidden');
-                if (checkoutLoggedBar) checkoutLoggedBar.classList.remove('hidden');
-                if (checkoutBadge) checkoutBadge.classList.remove('hidden');
-                const cAvatar = document.getElementById('checkout-google-avatar');
-                if (cAvatar) cAvatar.src = currentGoogleUser.picture || 'https://placehold.co/100x100/dcfce7/166534?text=G';
-                const cName = document.getElementById('checkout-google-name');
-                if (cName) cName.innerText = currentGoogleUser.name;
-                const cEmail = document.getElementById('checkout-google-email');
-                if (cEmail) cEmail.innerText = currentGoogleUser.email;
-
-                if (guestNameInput && !guestNameInput.value.trim()) {
-                    guestNameInput.value = currentGoogleUser.name;
-                }
-                if (guestPhoneInput && !guestPhoneInput.value.trim() && currentGoogleUser.phone) {
-                    guestPhoneInput.value = currentGoogleUser.phone;
-                }
-            } else {
-                headerAvatar.classList.add('hidden');
-                headerIcon.classList.remove('hidden');
-                headerText.innerText = '登入/註冊';
-
-                if (modalUnauth) modalUnauth.classList.remove('hidden');
-                if (modalAuth) modalAuth.classList.add('hidden');
-
-                if (checkoutBtnWrap) checkoutBtnWrap.classList.remove('hidden');
-                if (checkoutLoggedBar) checkoutLoggedBar.classList.add('hidden');
-                if (checkoutBadge) checkoutBadge.classList.add('hidden');
-                setupGoogleIdentityServices();
-            }
-        }
-
-        function handleHeaderGoogleAuthClick() {
-            toggleGoogleAuthModal();
-        }
-
-        function toggleGoogleAuthModal() {
-            const modal = document.getElementById('google-auth-modal');
-            const isOpening = modal.classList.contains('hidden');
-            modal.classList.toggle('hidden');
-            if (isOpening) {
-                updateGoogleAuthUI();
-                if (!currentGoogleUser) setupGoogleIdentityServices();
-            }
-        }
-
-        function logoutGoogleUser() {
-            if (typeof google !== 'undefined' && google.accounts && google.accounts.id) {
-                google.accounts.id.disableAutoSelect();
-            }
-            currentGoogleUser = null;
-            updateGoogleAuthUI();
-            showToast("已登出帳號");
-        }
-
-        async function syncGoogleUserToSheet(user) {
-            if (!GAS_WEB_APP_URL || !user) return;
-            const now = new Date();
-            const pad = (n) => String(n).padStart(2, '0');
-            const formattedNow = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
-
-            try {
-                await fetch(GAS_WEB_APP_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        action: 'upsertUser',
-                        user: {
-                            UserID: user.userId,
-                            GoogleSub: user.googleSub || '',
-                            Name: user.name || '',
-                            Phone: user.phone ? `'${user.phone}` : '',
-                            Email: user.email || '',
-                            PhotoUrl: user.picture || '',
-                            IsActive: user.isActive !== undefined ? user.isActive : 1,
-                            LoginDate: formattedNow,
-                            CreateDate: formattedNow,
-                            UpdateDate: formattedNow
-                        }
-                    })
-                });
-            } catch (e) {
-                console.warn("同步 Google 會員資料失敗:", e);
-            }
         }
 
         function renderStoreInfo() {
@@ -1579,14 +1209,11 @@
             container.innerHTML = `<div class="text-center py-10 text-forest-600"><i class="fa-solid fa-circle-notch fa-spin text-3xl mb-2"></i><p class="text-sm font-medium">正在同步讀取...</p></div>`;
 
             try {
-                // 優先透過 GAS 即時讀取最新 Orders 與 OrderItems，避免快取延遲查不到剛送出的訂單
-                const loadedFromGas = await fetchAllSheetsFromGAS();
-                if (!loadedFromGas) {
-                    await Promise.all([
-                        loadSheet('Orders'),
-                        loadSheet('OrderItems')
-                    ]);
-                }
+                // 重新載入最新 Orders 與 OrderItems 試算表資料
+                await Promise.all([
+                    loadSheet('Orders'),
+                    loadSheet('OrderItems')
+                ]);
 
                 const normalizePhone = (p) => String(p || '').replace(/[\s\-()]/g, '').trim();
                 const targetPhone = normalizePhone(phoneInput);
@@ -1944,8 +1571,6 @@
             if (isOpening) {
                 populatePickupTimeOptions();
                 setPickupMode('now');
-                updateGoogleAuthUI();
-                if (!currentGoogleUser) setupGoogleIdentityServices();
             }
             modal.classList.toggle('hidden');
         }
@@ -2180,9 +1805,7 @@
 
             // 顯示手機號碼確認視窗
             pendingGuestCheckoutInfo = {
-                type: currentGoogleUser ? 'Google會員' : '訪客',
-                userId: currentGoogleUser ? currentGoogleUser.userId : 'GUEST',
-                email: currentGoogleUser ? currentGoogleUser.email : '',
+                type: '訪客',
                 name: name,
                 phone: cleanPhone
             };
@@ -2281,13 +1904,6 @@
 
             // 傳送資料至 Google Apps Script 寫入 Orders 與 OrderItems 試算表
             sendOrderToSpreadsheet(orderRow, orderItemRows);
-
-            // 若為 Google 登入會員，同步更新會員的最新姓名與電話至 Users 工作表
-            if (currentGoogleUser) {
-                currentGoogleUser.name = userInfo.name;
-                currentGoogleUser.phone = cleanPhone;
-                syncGoogleUserToSheet(currentGoogleUser);
-            }
 
             const newOrder = {
                 id: orderId,
